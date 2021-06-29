@@ -1,6 +1,6 @@
 {
   "name": "ponch_eventbus",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "index.js",
   "author": "lukas spatschil <51056202+lukaspatschil@users.noreply.github.com>",
   "license": "MIT",
