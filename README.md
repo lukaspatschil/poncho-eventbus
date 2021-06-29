@@ -25,9 +25,10 @@ const removeFunction = eventBus.on(NewEvent, event => console.log(event));
 ### Removing an event listener
 
 When you add an event listener it will return a function. When it is called the event listener will be removed from the event bus.
+If the listener was removed successfully it will return `true` otherwise `false`.
 
 ```js
-removeFunction();
+const removed = removeFunction();
 ```
 
 ### Emitting an event
