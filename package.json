@@ -1,5 +1,5 @@
 {
-  "name": "ponch_eventbus",
+  "name": "ponch-eventbus",
   "version": "0.0.1",
   "main": "index.js",
   "author": "lukas spatschil <51056202+lukaspatschil@users.noreply.github.com>",
