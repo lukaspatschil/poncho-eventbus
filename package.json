@@ -4,6 +4,10 @@
   "main": "index.js",
   "author": "lukas spatschil <51056202+lukaspatschil@users.noreply.github.com>",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./dist/index.js"
+  },
   "devDependencies": {
     "@types/node": "^15.12.5",
     "jest": "^27.0.6",
