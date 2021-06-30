@@ -19,6 +19,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "keywords": ["ponchjs", "event", "events", "emitter", "eventbus", "eventemitter", "addEventListener", "addListener", "emit", "on"],
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
@@ -26,7 +27,8 @@
     "prepare": "tsc"
   },
   "prettier": {
-    "printWidth": 80,
+    "printWidth": 160,
+    "tabWidth": 2,
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
