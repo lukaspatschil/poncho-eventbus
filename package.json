@@ -1,6 +1,6 @@
 {
   "name": "@ponchojs/eventbus",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Lukas Spatschil",
@@ -19,11 +19,25 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "keywords": ["ponchjs", "event", "events", "emitter", "eventbus", "eventemitter", "addEventListener", "addListener", "emit", "on"],
+  "keywords": [
+    "ponchjs",
+    "event",
+    "events",
+    "emitter",
+    "eventbus",
+    "eventemitter",
+    "addEventListener",
+    "addListener",
+    "emit",
+    "on"
+  ],
   "scripts": {
     "prebuild": "rm -rf ./dist",
     "build": "tsc",
     "start": "node ./dist/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "tsc --noEmit",
     "prepare": "tsc"
   },
   "prettier": {
@@ -37,6 +51,7 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-typescript": "^7.14.5",
+    "@types/jest": "^26.0.23",
     "@types/node": "^15.12.5",
     "babel-jest": "^27.0.6",
     "jest": "^27.0.6",

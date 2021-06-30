@@ -1,4 +1,4 @@
-type EventType<T={}> = new (...args: any[]) => T;
+type EventType<T = {}> = new (...args: any[]) => T;
 type Listener<T> = (event: T) => void;
 type RemoveFunction = () => boolean;
 
@@ -14,28 +14,27 @@ export class EventBus {
 
     this.#listeners.set(event.name, [...oldListeners, listener]);
 
-    return () => {
+    return (): boolean => {
       const oldListeners = this.#listeners.get(event.name) ?? [];
       let status = false;
 
-      if (oldListeners.length >= 1) {
+      if (oldListeners.length <= 1) {
         status = this.#listeners.delete(event.name);
       } else {
-        // TODO make better return value
-        this.#listeners.set(event.name, oldListeners.filter(item => item === listener));
-        status = true;
+        const newListeners = oldListeners.filter((item) => item !== listener);
+        this.#listeners.set(event.name, newListeners);
+
+        status = Boolean(oldListeners.length - newListeners.length);
       }
 
       return status;
-    }
+    };
   }
 
   // TODO: Add better typing to only allow class objects
-  emit(event: Object) {
+  emit(event: Object): void {
     const listeners = this.#listeners.get(event.constructor.name) ?? [];
 
-    listeners.forEach(listener => listener(event));
+    listeners.forEach((listener) => listener(event));
   }
 }
-
-exports.EventBus = EventBus;

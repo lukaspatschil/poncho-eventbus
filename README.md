@@ -8,8 +8,6 @@ First import the package with ESM or CommonJS:
 
 ```js
 import { EventBus } from '@ponchojs/eventbus';
-
-const { EventBus } = require('@ponchojs/eventbus');
 ```
 
 In order to use the eventBus you will need to create a new instance of it:
