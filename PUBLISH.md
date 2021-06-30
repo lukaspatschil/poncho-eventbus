@@ -10,7 +10,7 @@ Push to main development branch in order to trigger CI.
 
 ## Make PR to master
 
-Create a new PR to the master branche with the message `Release 1.2.3` in order to create a new tag.
+Create a new PR to the master branche.
 
 ## Wait for CI to pass
 
@@ -19,5 +19,9 @@ You need to pass CI in order to be allowed to merge a PR.
 ## Merge the PR
 
 Merge into the maste branche
+
+## Make new release
+
+Make a new release in order to trigger npm upload.
 
 ## ... magic
