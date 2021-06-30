@@ -1,9 +1,9 @@
 name: CI
 on:
   push:
-    branches: [master, develop]
+    branches: [master]
   pull_request:
-    branches: [master, develop]
+    branches: [master]
 jobs:
   build:
     name: Lint on Node ${{ matrix.node }} and ${{ matrix.os }}
