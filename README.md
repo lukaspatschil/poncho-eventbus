@@ -1,6 +1,6 @@
 # poncho-eventbus
 
-A small event bus written in typescript with complete type safty.
+Light weight event bus for JavaScript and TypeScript written in TypeScript with complete type safty.
 
 ## Usage
 
