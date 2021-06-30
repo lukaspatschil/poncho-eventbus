@@ -2,7 +2,7 @@ type EventType<T = {}> = new (...args: any[]) => T;
 type Listener<T> = (event: T) => void;
 type RemoveFunction = () => boolean;
 
-export class EventBus {
+export default class EventBus {
   #listeners: Map<string, Function[]>;
 
   constructor() {
@@ -38,3 +38,5 @@ export class EventBus {
     listeners.forEach((listener) => listener(event));
   }
 }
+
+module.exports = EventBus;
