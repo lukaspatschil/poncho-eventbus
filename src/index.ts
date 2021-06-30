@@ -38,4 +38,4 @@ export class EventBus {
   }
 }
 
-module.exports= { EventBus };
+exports.EventBus = EventBus;
