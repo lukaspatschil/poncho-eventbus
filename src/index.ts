@@ -1,17 +1,41 @@
-import { EventBus } from './eventBus';
+type EventType<T={}> = new (...args: any[]) => T;
+type Listener<T> = (event: T) => void;
+type RemoveFunction = () => boolean;
 
-class LoggerEvent {
-  constructor(public type: string, public message: string) {}
+export class EventBus {
+  #listeners: Map<string, Function[]>;
+
+  constructor() {
+    this.#listeners = new Map<string, Function[]>();
+  }
+
+  on<T>(event: EventType<T>, listener: Listener<T>): RemoveFunction {
+    const oldListeners = this.#listeners.get(event.name) ?? [];
+
+    this.#listeners.set(event.name, [...oldListeners, listener]);
+
+    return () => {
+      const oldListeners = this.#listeners.get(event.name) ?? [];
+      let status = false;
+
+      if (oldListeners.length >= 1) {
+        status = this.#listeners.delete(event.name);
+      } else {
+        // TODO make better return value
+        this.#listeners.set(event.name, oldListeners.filter(item => item === listener));
+        status = true;
+      }
+
+      return status;
+    }
+  }
+
+  // TODO: Add better typing to only allow class objects
+  emit(event: Object) {
+    const listeners = this.#listeners.get(event.constructor.name) ?? [];
+
+    listeners.forEach(listener => listener(event));
+  }
 }
 
-const cobus = new EventBus;
-
-const bad = cobus.on(LoggerEvent, event => console.log(event));
-
-cobus.on(LoggerEvent, event => console.error(`${event.type}: ${event.message}`));
-
-cobus.emit(new LoggerEvent('ERROR', 'This is an error message since it is working!'));
-
-bad();
-
-cobus.emit(new LoggerEvent('ERROR', 'Secound message for the events'));
+module.exports= { EventBus };
