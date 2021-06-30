@@ -31,8 +31,7 @@ export default class EventBus {
     };
   }
 
-  // TODO: Add better typing to only allow class objects
-  emit(event: Object): void {
+  emit(event: object): void {
     const listeners = this.#listeners.get(event.constructor.name) ?? [];
 
     listeners.forEach((listener) => listener(event));
