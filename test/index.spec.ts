@@ -1,4 +1,4 @@
-import EventBus from '../src/index';
+import EventBus from '../lib/index';
 
 describe('EventBus Tests', () => {
   const message = 'This is a message';
