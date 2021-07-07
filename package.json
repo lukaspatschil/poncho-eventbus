@@ -20,7 +20,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "keywords": [
-    "ponchjs",
+    "ponchojs",
     "event",
     "events",
     "emitter",

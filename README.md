@@ -1,6 +1,8 @@
-# poncho-eventbus
+# @ponchojs/eventbus
 
-Light weight event bus for JavaScript and TypeScript written in TypeScript with complete type safety.
+Light weight event bus for JavaScript and TypeScript written in TypeScript with complete type integration.
+
+In order for the event bus to work it is necessary to use ES6 or higher.
 
 ## Usage
 
@@ -22,9 +24,9 @@ const eventBus = new EventBus();
 
 You can simply add an event listener by calling the `on` function on your event bus.
 The first value is the event it should listen to. This has to be a class.
-The secound parameter is the callback function which will be called when the event is emitted.
+The second parameter is the callback function which will be called when the event is emitted.
 
-The return value of this function will be the function which unsbscribes this listener from the event bus.
+The return value of this function will be the function which unsubscribes this listener from the event bus.
 
 ```js
 const removeFunction = eventBus.on(NewEvent, event => console.log(event));
@@ -46,3 +48,11 @@ With the `emit` function you can emit a new event on the event bus. This functio
 ```js
 eventBus.emit(new NewEvent('This is data'));
 ```
+
+## TypeScript and typing
+
+Since this package uses typescript it is possible to get all the type information about the event you are listening to. This helps while developing your callbacks and also allows the typescript compiler to recognize errors in your type usage.
+
+## Bugs and feature suggestions
+
+If you find any bugs or have any feature suggestions feel free to create a new issue on the [issue tracker](https://github.com/lukaspatschil/poncho-eventbus/issues).
