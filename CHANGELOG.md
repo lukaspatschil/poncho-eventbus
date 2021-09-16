@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.0 - 16/09/2021
+
+- Add esbuild as build tool
+
 ## v0.1.2 - 30/06/2021
 
 - Change main folder to lib
