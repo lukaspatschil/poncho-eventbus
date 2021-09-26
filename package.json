@@ -1,6 +1,6 @@
 {
   "name": "@ponchojs/eventbus",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Lukas Spatschil",
@@ -33,7 +33,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf -rf ./dist && tsc --noEmit",
-    "build": "tsc --emitDeclarationOnly && esbuild lib/index.ts --bundle --minify --sourcemap --outdir=dist --target=chrome58,firefox57,safari11,edge16",
+    "build": "tsc --emitDeclarationOnly && esbuild lib/index.ts --bundle --minify --outdir=dist --target=chrome58,firefox57,safari11,edge16",
     "start": "node ./dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -48,12 +48,8 @@
     "trailingComma": "es5"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/preset-env": "^7.14.7",
-    "@babel/preset-typescript": "^7.14.5",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.5",
-    "babel-jest": "^27.0.6",
     "esbuild": "^0.12.28",
     "jest": "^27.0.6",
     "rimraf": "^3.0.2",
