@@ -74,12 +74,11 @@ describe('EventBus Tests', () => {
       eventBus.on(NewEvent, mockCallback2);
 
       // When
-      const status = remove();
+      remove();
       eventBus.emit(new NewEvent(type, message));
 
       // Than
-      expect(status).toBe(true);
-      expect(mockCallback2).toBeCalledWith({type, message});
+      expect(mockCallback).not.toBeCalledWith({type, message});
     });
   });
 })
