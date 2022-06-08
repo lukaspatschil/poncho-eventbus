@@ -1,12 +1,18 @@
 {
   "name": "@ponchojs/eventbus",
   "version": "0.2.1",
-  "module": "dist/index.js",
+  "module": "dist/main.es.js",
   "types": "dist/index.d.ts",
   "author": "Lukas Spatschil",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/main.es.js",
+      "require": "./dist/main.umd.js"
+    }
+  },
   "engines": {
     "node": ">=10"
   },
@@ -33,7 +39,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf -rf ./dist && tsc --noEmit",
-    "build": "tsc --emitDeclarationOnly && esbuild lib/index.ts --bundle --minify --outdir=dist --target=chrome58,firefox57,safari11,edge16",
+    "build": "vite build",
     "start": "node ./dist/index.js",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -52,12 +58,13 @@
     "@types/node": "^15.12.5",
     "@typescript-eslint/eslint-plugin": "^5.27.1",
     "@typescript-eslint/parser": "^5.27.1",
-    "esbuild": "^0.12.28",
     "eslint": "^8.17.0",
     "jest": "^27.0.6",
     "rimraf": "^3.0.2",
     "ts-jest": "^27.0.3",
-    "typescript": "^4.3.4"
+    "typescript": "^4.3.4",
+    "vite": "^2.9.10",
+    "vite-plugin-dts": "^1.2.0"
   },
   "jest": {
     "preset": "ts-jest"
