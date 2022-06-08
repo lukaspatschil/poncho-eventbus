@@ -1,4 +1,5 @@
 import EventBus from '../lib/index';
+import {EventBusError} from "../lib/EventBusError";
 
 describe('EventBus Tests', () => {
   const message = 'This is a message';
@@ -21,15 +22,27 @@ describe('EventBus Tests', () => {
     it('registers a new event listener and fire event', () => {
       // Given
       eventBus.on(NewEvent, mockCallback);
-  
+
       // When
       eventBus.emit(new NewEvent(type, message));
   
-      // Than
+      // Then
       expect(mockCallback).toBeCalledWith({type, message});
     });
 
-    it('registers a new event listener and fire event it multiple times', () => {
+    it('registers a new event with a string and fire event', () => {
+      // Given
+      const eventName = 'EventName';
+      eventBus.on(eventName, mockCallback);
+
+      // When
+      eventBus.emit(eventName);
+
+      // Then
+      expect(mockCallback).toBeCalledWith(eventName);
+    });
+
+    it('registers a new event listener and fire event multiple times', () => {
       // Given
       eventBus.on(NewEvent, mockCallback);
   
@@ -37,8 +50,17 @@ describe('EventBus Tests', () => {
       eventBus.emit(new NewEvent(type, message));
       eventBus.emit(new NewEvent(type, message));
   
-      // Than
+      // Then
       expect(mockCallback).toBeCalledTimes(2);
+    });
+
+    it('throws an error when an unsupported type is provided', () => {
+      // When
+      // @ts-expect-error - The type error should be tested
+      const instantiate = () => eventBus.on(12, mockCallback);
+      
+      // Then
+      expect(instantiate).toThrowError(EventBusError);
     });
   });
 
@@ -52,7 +74,7 @@ describe('EventBus Tests', () => {
       remove();
       eventBus.emit(new NewEvent(type, message));
 
-      // Than
+      // Then
       expect(mockCallback).toBeCalledTimes(1);
     });
 
@@ -63,7 +85,7 @@ describe('EventBus Tests', () => {
       // When
       const status = remove();
 
-      // Than
+      // Then
       expect(status).toBe(true);
     });
 
@@ -77,7 +99,7 @@ describe('EventBus Tests', () => {
       remove();
       eventBus.emit(new NewEvent(type, message));
 
-      // Than
+      // Then
       expect(mockCallback).not.toBeCalledWith({type, message});
     });
   });
