@@ -1,16 +1,15 @@
-import { EventType } from './EventTypes';
+import {EventType} from './EventTypes';
 import {EventBusError} from "./EventBusError";
 
-type EventClass<T = {}> = new (...args: any[]) => T;
-export type Event<T = {}> = EventClass<T>;
-export type Listener<T> = (event: T) => void;
+export type Event<T = Record<string, unknown>> = new (...args: unknown[]) => T;
+export type Listener<T> = (event: T | string) => void;
 export type RemoveFunction = () => boolean;
 
 export class EventBus {
-  #listeners: Map<string, Function[]>;
+  #listeners: Map<string, Listener<any>[]>;
 
   constructor() {
-    this.#listeners = new Map<string, Function[]>();
+    this.#listeners = new Map<string, Listener<any>[]>();
   }
 
   on<T>(event: Event<T>, listener: Listener<T>): RemoveFunction;
@@ -46,7 +45,7 @@ export class EventBus {
         eventKey = `${EventType.STRING}_${event as string}`;
         break;
       case EventType.FUNCTION:
-        eventKey = `${EventType.FUNCTION}_${(event as EventClass).name }`;
+        eventKey = `${EventType.FUNCTION}_${(event as Event).name }`;
         break;
       case EventType.OBJECT:
         eventKey = `${EventType.FUNCTION}_${(event as object).constructor.name}`;

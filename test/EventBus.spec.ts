@@ -1,5 +1,5 @@
 import EventBus from '../lib/index';
-import {EventBusError} from "../lib/EventBusError";
+import {EventBusError} from "../lib";
 
 describe('EventBus Tests', () => {
   const message = 'This is a message';
@@ -15,7 +15,7 @@ describe('EventBus Tests', () => {
 
   beforeEach(() => {
     eventBus = new EventBus();
-    mockCallback = jest.fn(() => {});
+    mockCallback = jest.fn();
   });
 
   describe('Add event listener', () => {
