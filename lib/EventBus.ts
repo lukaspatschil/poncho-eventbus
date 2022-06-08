@@ -35,6 +35,8 @@ export class EventBus {
     listeners.forEach((listener) => listener(event));
   }
 
+  post = this.emit;
+
   #getEventKey<T>(event: Event<T> | string | object): string {
     const eventType = typeof event;
     let eventKey;

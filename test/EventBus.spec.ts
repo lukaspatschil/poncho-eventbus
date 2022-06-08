@@ -64,6 +64,30 @@ describe('EventBus Tests', () => {
     });
   });
 
+  describe('Post events', () => {
+    it('emits an event on to the listener', () => {
+      // Given
+      eventBus.on(NewEvent, mockCallback);
+
+      // When
+      eventBus.emit(new NewEvent(type, message));
+
+      // Then
+      expect(mockCallback).toBeCalledWith({type, message});
+    });
+
+    it('posts an event on to the listener', () => {
+      // Given
+      eventBus.on(NewEvent, mockCallback);
+
+      // When
+      eventBus.post(new NewEvent(type, message));
+
+      // Then
+      expect(mockCallback).toBeCalledWith({type, message});
+    });
+  });
+
   describe('Remove event listener', () => {
     it('remove a event listener and do not fire event after removal', () => {
       // Given
