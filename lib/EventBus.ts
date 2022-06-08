@@ -1,9 +1,9 @@
 import {EventType} from './EventTypes';
 import {EventBusError} from "./EventBusError";
 
-export type Event<T = Record<string, unknown>> = new (...args: unknown[]) => T;
+export type Event<T = Record<string, unknown>> = new (...args: any[]) => T;
 export type Listener<T> = (event: T | string) => void;
-export type RemoveFunction = () => boolean;
+export type Subscription = { detach: () => boolean };
 
 export class EventBus {
   #listeners: Map<string, Listener<any>[]>;
@@ -12,9 +12,9 @@ export class EventBus {
     this.#listeners = new Map<string, Listener<any>[]>();
   }
 
-  on<T>(event: Event<T>, listener: Listener<T>): RemoveFunction;
-  on(event: string, listener: Listener<string>): RemoveFunction;
-  on<T>(event: Event<T> | string, listener: Listener<T | string>): RemoveFunction {
+  on<T>(event: Event<T>, listener: Listener<T>): Subscription;
+  on(event: string, listener: Listener<string>): Subscription;
+  on<T>(event: Event<T> | string, listener: Listener<T | string>): Subscription {
     if (typeof event !== EventType.STRING && typeof event !== EventType.FUNCTION) {
       throw new EventBusError(`Event type ${typeof event} is not supported`);
     }
@@ -24,7 +24,7 @@ export class EventBus {
 
     this.#listeners.set(eventKey, [...oldListeners, listener]);
 
-    return this.#createRemoveFunction(eventKey, listener);
+    return {detach: this.#createSubscription(eventKey, listener)};
   }
 
   emit(event: object | string): void {
@@ -58,7 +58,7 @@ export class EventBus {
     return eventKey;
   }
 
-  #createRemoveFunction<T>(eventKey: string, listener: Listener<T>): () => boolean {
+  #createSubscription<T>(eventKey: string, listener: Listener<T>): () => boolean {
     return () => {
       const oldListeners = this.#listeners.get(eventKey) ?? [];
       let status = false;

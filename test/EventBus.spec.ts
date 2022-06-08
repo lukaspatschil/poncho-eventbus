@@ -91,11 +91,11 @@ describe('EventBus Tests', () => {
   describe('Remove event listener', () => {
     it('remove a event listener and do not fire event after removal', () => {
       // Given
-      const remove = eventBus.on(NewEvent, mockCallback);
+      const subscription = eventBus.on(NewEvent, mockCallback);
 
       // When
       eventBus.emit(new NewEvent(type, message));
-      remove();
+      subscription.detach();
       eventBus.emit(new NewEvent(type, message));
 
       // Then
@@ -104,10 +104,10 @@ describe('EventBus Tests', () => {
 
     it('remove a event listener successful', () => {
       // Given
-      const remove = eventBus.on(NewEvent, mockCallback);
+      const subscription = eventBus.on(NewEvent, mockCallback);
 
       // When
-      const status = remove();
+      const status = subscription.detach();
 
       // Then
       expect(status).toBe(true);
@@ -116,11 +116,11 @@ describe('EventBus Tests', () => {
     it('remove a event listener from event with multiple listeners', () => {
       // Given
       const mockCallback2 = jest.fn(a => a);
-      const remove = eventBus.on(NewEvent, mockCallback);
+      const subscription = eventBus.on(NewEvent, mockCallback);
       eventBus.on(NewEvent, mockCallback2);
 
       // When
-      remove();
+      subscription.detach();
       eventBus.emit(new NewEvent(type, message));
 
       // Then
