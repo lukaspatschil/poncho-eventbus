@@ -29,9 +29,9 @@ The second parameter is the callback function which will be called when the even
 The return value of this function will be the function which unsubscribes this listener from the event bus.
 
 ```js
-const removeFunction = eventBus.on(NewEvent, event => console.log(event));
+const subscribtion = eventBus.on(NewEvent, event => console.log(event));
 
-const removeFunction = eventBus.on('event', event => console.log(event));
+const subscribtion = eventBus.on('event', event => console.log(event));
 ```
 
 ### Removing an event listener
@@ -40,7 +40,7 @@ When you add an event listener it will return a function. When it is called the 
 If the listener was removed successfully it will return `true` otherwise `false`.
 
 ```js
-const removed = removeFunction();
+const removed = subscribtion.detach();
 ```
 
 ### Emitting an event
@@ -59,7 +59,7 @@ eventBus.post('event');
 
 ## TypeScript and typing
 
-Since this package uses typescript it is possible to get all the type information about the event you are listening to. This helps while developing your callbacks and also allows the typescript compiler to recognize errors in your type usage.
+Since this package uses' typescript it is possible to get all the type information about the event you are listening to. This helps while developing your callbacks and also allows the typescript compiler to recognize errors in your type usage.
 
 ## Bugs and feature suggestions
 
