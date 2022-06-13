@@ -7,7 +7,7 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, 'lib/index.ts'),
             name: '@ponchojs/eventbus',
-            fileName: (format) => `[name].${format}.js`,
+            fileName: (format) => `main.${format}.js`,
         },
     },
     plugins: [dts()],
