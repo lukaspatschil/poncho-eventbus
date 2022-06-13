@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          fetch-depth: 0
+          persist-credentials: false
       - run: npm ci
       - name: Lint
         run: npm run lint

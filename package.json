@@ -38,7 +38,6 @@
     "on"
   ],
   "scripts": {
-    "prebuild": "rimraf -rf ./dist && tsc --noEmit",
     "build": "vite build",
     "start": "node ./dist/index.js",
     "test": "jest",
