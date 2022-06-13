@@ -23,13 +23,15 @@ const eventBus = new EventBus();
 ### Adding an event listener
 
 You can simply add an event listener by calling the `on` function on your event bus.
-The first value is the event it should listen to. This has to be a class.
+The first value is the event it should listen to. This has to be a class, function or string.
 The second parameter is the callback function which will be called when the event is emitted.
 
 The return value of this function will be the function which unsubscribes this listener from the event bus.
 
 ```js
 const removeFunction = eventBus.on(NewEvent, event => console.log(event));
+
+const removeFunction = eventBus.on('event', event => console.log(event));
 ```
 
 ### Removing an event listener
@@ -43,10 +45,16 @@ const removed = removeFunction();
 
 ### Emitting an event
 
-With the `emit` function you can emit a new event on the event bus. This function simply takes your event data as input.
+With the `emit` or `post` function you can emit a new event on the event bus. This function simply takes your event data as input.
 
 ```js
 eventBus.emit(new NewEvent('This is data'));
+
+eventBus.post(new NewEvent('This is data'));
+
+eventBus.emit('event');
+
+eventBus.post('event');
 ```
 
 ## TypeScript and typing
