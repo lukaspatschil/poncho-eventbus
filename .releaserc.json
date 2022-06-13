@@ -1,0 +1,18 @@
+{
+    "tagFormat": "v${version}",
+    "branches": [
+        "master",
+        { "name": "alpha", "prerelease": true }
+    ],
+    "debug": true,
+    "ci": true,
+    "dryRun": false,
+    "plugins": [
+        ["@semantic-release/commit-analyzer", { "preset": "angular" }],
+        "@semantic-release/release-notes-generator",
+        ["@semantic-release/changelog", { "changelogFile": "docs/CHANGELOG.md" }],
+        ["@semantic-release/npm"],
+        ["@semantic-release/git", { "assets": ["dist/**/*.{js,ts}", "docs", "package.json"] }],
+        "@semantic-release/github"
+    ]
+}
