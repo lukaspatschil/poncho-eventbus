@@ -1,6 +1,6 @@
 {
   "name": "@ponchojs/eventbus",
-  "version": "0.2.1",
+  "version": "1.0.2",
   "module": "dist/main.es.js",
   "types": "dist/index.d.ts",
   "author": "Lukas Spatschil",
