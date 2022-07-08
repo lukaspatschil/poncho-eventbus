@@ -36,6 +36,10 @@ export class EventBus {
 
   post = this.emit;
 
+  clear(): void {
+    this.#listeners = new Map();
+  }
+
   #getEventKey<T>(event: Event<T> | string | object): string {
     const eventType = typeof event;
     let eventKey;

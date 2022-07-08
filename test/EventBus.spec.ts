@@ -25,7 +25,7 @@ describe('EventBus Tests', () => {
 
       // When
       eventBus.emit(new NewEvent(type, message));
-  
+
       // Then
       expect(mockCallback).toBeCalledWith({type, message});
     });
@@ -45,11 +45,11 @@ describe('EventBus Tests', () => {
     it('registers a new event listener and fire event multiple times', () => {
       // Given
       eventBus.on(NewEvent, mockCallback);
-  
+
       // When
       eventBus.emit(new NewEvent(type, message));
       eventBus.emit(new NewEvent(type, message));
-  
+
       // Then
       expect(mockCallback).toBeCalledTimes(2);
     });
@@ -58,7 +58,7 @@ describe('EventBus Tests', () => {
       // When
       // @ts-expect-error - The type error should be tested
       const instantiate = () => eventBus.on(12, mockCallback);
-      
+
       // Then
       expect(instantiate).toThrowError(EventBusError);
     });
@@ -121,6 +121,20 @@ describe('EventBus Tests', () => {
 
       // When
       subscription.detach();
+      eventBus.emit(new NewEvent(type, message));
+
+      // Then
+      expect(mockCallback).not.toBeCalledWith({type, message});
+    });
+  });
+
+  describe('clear', () => {
+    it('removes all event listener', () => {
+      // Given
+      eventBus.on(NewEvent, mockCallback);
+
+      // When
+      eventBus.clear();
       eventBus.emit(new NewEvent(type, message));
 
       // Then
