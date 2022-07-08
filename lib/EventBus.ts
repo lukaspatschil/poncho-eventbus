@@ -24,7 +24,7 @@ export class EventBus {
 
     this.#listeners.set(eventKey, [...oldListeners, listener]);
 
-    return {detach: this.#createSubscription(eventKey, listener)};
+    return {detach: this.#createDetachFunction(eventKey, listener)};
   }
 
   emit(event: object | string): void {
@@ -58,10 +58,10 @@ export class EventBus {
     return eventKey;
   }
 
-  #createSubscription<T>(eventKey: string, listener: Listener<T>): () => boolean {
+  #createDetachFunction<T>(eventKey: string, listener: Listener<T>): () => boolean {
     return () => {
       const oldListeners = this.#listeners.get(eventKey) ?? [];
-      let status = false;
+      let status;
 
       if (oldListeners.length <= 1) {
         status = this.#listeners.delete(eventKey);
